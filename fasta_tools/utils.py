@@ -349,3 +349,39 @@ def get_N_percent(fasta_file):
         Seq_len=float(len(dict_seq[id]))
         Percent=float(N_count)/float(Seq_len)*100
         print(id+" "+str(Percent))
+
+
+## to do, to use Seq instance to compute Nper ########
+def get_N_percent(fasta_file, output_file, sample_name):
+    """
+    Usage
+    ------
+    Count number of "N" or "n" character in fasta sequence
+    Launch the function with 1 argument : yourfile.fasta
+    Dependency : fasta_dict(fasta_file) function
+    Python verion 2.7 + 3.6
+
+    Arguments
+    ---------
+    fasta.file : PATH/to_your/fasta.file
+
+    command line
+    -------------
+    Fasta_Tools.get_N_percent(fasta.file)
+
+    output : ID percent_N in standard output
+    --------
+    """
+
+    dict_seq = fasta_dict(fasta_file)
+
+    with open(output_file, "w") as out:
+        out.write("seq_id\tsample\tN_percent\n")
+
+        for seq_id, sequence in dict_seq.items():
+            s = Seq(seqType="consensus", seq=sequence, Ind=sample_name)
+            nper = s.get_Nper()
+
+            out.write(f"{seq_id}\t{sample_name}\t{nper}\n")
+
+##to do #############
