@@ -9,3 +9,5 @@ import os
 
 from .SeqMetric import Seq
 from .utils import *
+
+test
