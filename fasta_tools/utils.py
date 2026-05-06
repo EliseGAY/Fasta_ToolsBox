@@ -307,81 +307,37 @@ def remove_dup(fasta_file, output_fasta):
         fastout.write(">"+key+"\n"+result[key]+"\n")
     fastout.close()
 
-#-------------------------------------#
-#-------------------------------------#
-# Compute N percent in from fast file
-#-------------------------------------#
-#-------------------------------------#
-
-def get_N_percent(fasta_file):
+def get_N_percent(fasta_file, output_file, sample_name=None):
     """
     Usage
     ------
     Count number of "N" or "n" character in fasta sequence
-    Launch the function with 1 argument : yourfile.fasta
+    Launch the function with 3 argument : yourfile.fasta, output_file, sample_name (optional)
     Dependency : fasta_dict(fasta_file) function
     Python verion 2.7 + 3.6
 
     Arguments
     ---------
     fasta.file : PATH/to_your/fasta.file
+    output_file : txt file , with seq_id, sample name and N percent for each sequence by row
+    sample_name : string, name of the sample (optional)
 
     command line
     -------------
-    Fasta_Tools.get_N_percent(fasta.file)
+    Fasta_Tools.get_N_percent(fasta.file,  output_file, sample_name)
 
-    output : ID percent_N in standard output
-    --------
-    """
-
-    #----------------------------#
-    # read and initiate variable
-    #----------------------------#
-
-    # create dictionary of all seqeunce with their ID
-    dict_seq=fasta_dict(fasta_file)
-    #----------------------------#
-    # Compute N count and percent
-    #----------------------------#
-
-    for id in dict_seq:
-        N_count=int(dict_seq[id].upper().count("N"))
-        Seq_len=float(len(dict_seq[id]))
-        Percent=float(N_count)/float(Seq_len)*100
-        print(id+" "+str(Percent))
-
-
-## to do, to use Seq instance to compute Nper ########
-def get_N_percent(fasta_file, output_file, sample_name):
-    """
-    Usage
-    ------
-    Count number of "N" or "n" character in fasta sequence
-    Launch the function with 1 argument : yourfile.fasta
-    Dependency : fasta_dict(fasta_file) function
-    Python verion 2.7 + 3.6
-
-    Arguments
-    ---------
-    fasta.file : PATH/to_your/fasta.file
-
-    command line
-    -------------
-    Fasta_Tools.get_N_percent(fasta.file)
-
-    output : ID percent_N in standard output
+    output : ID percent_N in a file
     --------
     """
 
     dict_seq = fasta_dict(fasta_file)
 
     with open(output_file, "w") as out:
-        out.write("seq_id\tsample\tN_percent\n")
+        out.write(f"seq_id\t{sample_name}\n")
 
         for seq_id, sequence in dict_seq.items():
+
             s = Seq(seqType="consensus", seq=sequence, Ind=sample_name)
             nper = s.get_Nper()
 
-            out.write(f"{seq_id}\t{sample_name}\t{nper}\n")
-
-##to do #############
+            out.write(f"{seq_id}\t{nper}\n")
