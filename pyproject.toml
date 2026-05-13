@@ -7,9 +7,5 @@ name = "fasta_tools"
 version = "0.1.0"
 description = "FASTA utilities for bioinformatics pipelines"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["fasta_tools"]
-
 [tool.setuptools]
 packages = ["fasta_tools"]
