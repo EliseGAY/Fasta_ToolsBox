@@ -3,12 +3,13 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "fasta_toolbox"
+name = "fasta_tools"
 version = "0.1.0"
 description = "FASTA utilities for bioinformatics pipelines"
 
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["."]  # list of folders that contain the packages (["."] by default)
+include = ["fasta_tools"]  # package names should match these glob patterns (["*"] by default)
 
-[tool.setuptools.package-data]
-fasta_tools = ["*"]
+[tool.setuptools]
+packages = ["fasta_tools"]
