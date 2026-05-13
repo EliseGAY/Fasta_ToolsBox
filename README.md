@@ -23,14 +23,15 @@ This module provides handy utilities to split, subset, deduplicate, and analyze 
 Clone this repository and import the module into your project:
 
 ```bash
-git clone https://github.com/your-account/Fasta_Tools.git
-cd Fasta_Tools
+git clone https://github.com/EliseGAY/Fasta_ToolsBox.git
+cd Fasta_ToolsBox
+pip install -e .
 ```
 
 In your Python script:
 
 ```python
-from Fasta_Tools import split_fasta, fasta_dict, Select_Seq, add_fasta_name, remove_dup, get_N_percent
+import fasta_tools
 ```
 
 ---
@@ -39,13 +40,13 @@ from Fasta_Tools import split_fasta, fasta_dict, Select_Seq, add_fasta_name, rem
 
 ### Split a FASTA file
 ```python
-split_fasta("example.fasta", 100)
+fasta_tools.split_fasta("example.fasta", 100)
 ```
 ➡ Splits `example.fasta` into multiple smaller files with 100 sequences each.  
 
 ### Convert FASTA into a dictionary
 ```python
-d = fasta_dict("example.fasta")
+d = fasta_tools.fasta_dict("example.fasta")
 print(d["seq1"])
 ```
 ➡ Prints the sequence for ID `seq1`.  
@@ -53,24 +54,24 @@ print(d["seq1"])
 ### Extract sequences by ID
 ```python
 ids = ["seq1", "seq2", "seq3"]
-Select_Seq("example.fasta", ids, "subset.fasta")
+fasta_tools.Select_Seq("example.fasta", ids, "subset.fasta")
 ```
 ➡ Creates `subset.fasta` containing only the requested sequences.  
 
 ### Rename FASTA IDs
 ```python
-add_fasta_name("example.fasta", "new_ids.txt", "renamed.fasta")
+fasta_tools.add_fasta_name("example.fasta", "new_ids.txt", "renamed.fasta")
 ```
 ➡ `new_ids.txt` should contain one new name per line.  
 
 ### Remove duplicate sequences
 ```python
-remove_dup("example.fasta", "deduplicated.fasta")
+fasta_tools.remove_dup("example.fasta", "deduplicated.fasta")
 ```
 
 ### Compute %N (ambiguous bases) per sequence
 ```python
-get_N_percent("example.fasta")
+fasta_tools.get_N_percent("example.fasta")
 ```
 ➡ Prints `sequence_ID percent_N` for each sequence.  
 
