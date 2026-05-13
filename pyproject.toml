@@ -8,8 +8,8 @@ version = "0.1.0"
 description = "FASTA utilities for bioinformatics pipelines"
 
 [tool.setuptools.packages.find]
-where = ["."]  # list of folders that contain the packages (["."] by default)
-include = ["fasta_tools"]  # package names should match these glob patterns (["*"] by default)
+where = ["."]
+include = ["fasta_tools"]
 
 [tool.setuptools]
 packages = ["fasta_tools"]
